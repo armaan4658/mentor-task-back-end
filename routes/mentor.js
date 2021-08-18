@@ -22,7 +22,33 @@ router.post('/addmentor',async(req,res) => {
         res.send({"message":"mentor already exists"})
     }
 })
-
+//getting mentor 
+router.get('/getmentor',async(req,res) => {
+    try{
+        const mentors = await Mentor.find();
+        res.status(200).send(mentors);
+    }catch(e){
+        res.status(402).send({"message":e});
+    }
+})
+//getting student 
+router.get('/getstudent',async(req,res) => {
+    try{
+        const students = await Student.find();
+        res.status(200).send(students);
+    }catch(e){
+        res.status(402).send({"message":e});
+    }
+})
+//getting assigned mentor & student
+router.get('/getassignedstudents',async(req,res) => {
+    try{
+        const assignedStudents = await AssignMentor.find();
+        res.status(200).send(assignedStudents);
+    }catch(e){
+        res.status(402).send({"message":"green"});
+    }
+})
 // adding student
 router.post('/addstudent',async(req,res) => {
     const {studentName} = req.body;
